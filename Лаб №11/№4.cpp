@@ -3,7 +3,6 @@
 #include <unordered_map>
 using namespace std;
 int RIM_CH(const string& rim) {
-    // Карта значений римских символов
     unordered_map<char, int> rim = {
         {'I', 1},
         {'V', 5},
@@ -14,20 +13,18 @@ int RIM_CH(const string& rim) {
         {'M', 1000}
     };
 
-    int total = 0; // Переменная для хранения результата
-    int pred = 0; // Предыдущее значение цифры
+    int total = 0, pred = 0;
     for (int i = rim.length() - 1; i >= 0; --i) {
         char c = rim[i];
-        int currentValue = rim[c];  // Значение текущего символа
+        int currentValue = rim[c];  
 
-        // Если текущая цифра меньше предыдущей, нужно вычесть её
+        
         if (currentValue < pred) {
             total -= currentValue;
         } else {
             total += currentValue;
         }
 
-        // Обновляем предыдущее значение
         pred = currentValue;
     }
 

@@ -1,34 +1,36 @@
 #include <iostream>
-#include <string>
 #include <cctype>
+#include <string>
 using namespace std;
-int main() {
-    string input;
-    cout << "Введите строку: ";
-    getline(cin, input);
-    int kS = 0, ks = 0, kDigits = 0, kUppercase = 0;
-    string newString = input;
-    for (int i = 0; i < input.length(); ++i) {
-        char ch = input[i];
-        if (ch == 'S') kS++;
-        if (ch == 's') ks++;
-        if (isdigit(ch)) kDigits++;
-        if (isupper(ch)) kUppercase++;
-        if (isdigit(ch)) {
-            newString[i] = '5';
-        } else if (islower(ch)) {
-            newString[i] = toupper(ch);
-        }
+int main()
+{
+    setlocale(LC_ALL, "RUS");
+    string str;
+    int kS = 0, ks = 0, kDigits = 0, kUpper = 0;
+    cout << "Введите строчку: ";
+    getline(cin, str);
+    string newstr = str;
+    for (char element: str)
+    {
+        if (element == 's') ks++;
+        else if(element == 'S') kS++;
+        if (isdigit(element)) kDigits++;
+        if(element == toupper(element)) kUpper++;
     }
-    int S_s = kS + ks;
 
-    const char* cString = newString.c_str();
-
-    printf("Исходная строка = \"%s\",\n", input.c_str());
-    printf("количество S = %d,\n", kS);
-    printf("количество s = %d,\n", ks);
-    printf("количество s и S = %d,\n", S_s);
-    printf("количество цифр = %d,\n", kDigits);
-    printf("количество заглавных букв = %d\n", kUppercase);
-    printf("новая строка = \"%s\"\n", cString);
+    for (int i = 0; i < newstr.length(); i++)
+    {
+        char element = newstr[i];
+        if(isdigit(element)) newstr[i] = '5';
+        if(isdigit(element) == false && element != toupper(element)) newstr[i] = toupper(element);
+    }
+    const char* cString = newstr.c_str();
+    printf("Исходная строка = %s\n", str);
+    printf("количество S = %d\n", kS);
+    printf("количество s = %d\n", ks);
+    printf("количество s и S = %d\n", ks + kS);
+    printf("количество цифр = %d\n", kDigits);
+    printf("количество заглавных букв = %d\n", kUpper - kDigits);
+    printf("новая строка = %s\n", cString );
+    
 }
